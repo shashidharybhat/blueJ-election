@@ -1,10 +1,13 @@
-import java.io.FileWriter;  
+import java.io.*;  
 public class FileWriterExample {  
     
     public static void main(String args[]){    
          try{    
-           FileWriter fw=new FileWriter("F:\\testout.txt");    
-           fw.write("Welcome to javaTpoint.");    
+           RandomAccessFile fw=new RandomAccessFile("G:\\testout.txt","rw");    
+           fw.seek(0);
+           fw.writeUTF("3");    
+           //fw.writeChars("\n\r");
+           fw.writeUTF("5");
            fw.close();    
           }catch(Exception e){System.out.println(e);}    
           System.out.println("Success...");    

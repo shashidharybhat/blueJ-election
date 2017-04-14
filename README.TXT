@@ -1,14 +1,13 @@
-------------------------------------------------------------------------
-This is the project README file. Here, you should describe your project.
-Tell the reader (someone who does not know anything about this project)
-all he/she needs to know. The comments should usually include at least:
-------------------------------------------------------------------------
+CopyRighted ©
+<a target="_blank" href="https://www.copyrighted.com/copyrights/view/lgvy-r57d-6tcj-trzm"><img border="0" alt="Copyrighted.com Registered &amp; Protected 
+LGVY-R57D-6TCJ-TRZM" title="Copyrighted.com Registered &amp; Protected 
+LGVY-R57D-6TCJ-TRZM" width="150" height="40" src="https://static.copyrighted.com/images/seal.gif" /></a>
 
-PROJECT TITLE:
-PURPOSE OF PROJECT:
-VERSION or DATE:
-HOW TO START THIS PROJECT:
-AUTHORS:
+PROJECT TITLE:Election
+PURPOSE OF PROJECT:replacing EVM's
+VERSION or DATE:4.3.1
+HOW TO START THIS PROJECT:Use main method.
+AUTHORS:Shashidhar Y Bhat
 USER INSTRUCTIONS:
 This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. 
 Creative Commons Attribution-ShareAlike 4.0 International Public License

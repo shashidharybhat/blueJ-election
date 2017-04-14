@@ -1,10 +1,11 @@
 
   
-import java.io.FileReader;  
+import java.io.*;  
 public class FileReaderExample {  
-    public static void main(String args[])throws Exception{    
-          FileReader fr=new FileReader("F:\testout.txt");    
+    public static void main(String args[])throws FileNotFoundException,IOException{    
+          FileReader fr=new FileReader("G:\\testout.txt");    
           int i;    
+          fr.skip(2);
           while((i=fr.read())!=-1)    
           System.out.print((char)i);    
           fr.close();    
