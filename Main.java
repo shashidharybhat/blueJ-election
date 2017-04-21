@@ -53,9 +53,9 @@ public class Main {
         private boolean running = true;
         public void run() {
             while (running) {
-                System.out.print("\b ");
+                System.out.print("\b\n ");
                 try {
-                    Thread.currentThread().sleep(1);
+                    Thread.currentThread().sleep(100);
                 }
                 catch(InterruptedException e) {
                     break;

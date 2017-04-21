@@ -4,8 +4,9 @@
  * constructors , bufferedReader , Scanner , if statements
  * try catch operations.
  */
+ import elect.*;
 import java.io.*;
-import java.util.concurrent.TimeUnit;
+import java.util.*;
   public class Election_Main 
   {
     String voterID[] = new String[900];
@@ -15,10 +16,13 @@ import java.util.concurrent.TimeUnit;
     static String presentid;/**...................................................The voter ID of the present voter*/
     BufferedReader buf = new BufferedReader(new InputStreamReader(System.in));/** Buffered reader*/
     static Election_Main ob = new Election_Main();/**.............................Main class object*/
-    static VoteCandidate vote = new VoteCandidate();/**...........................VoteCandidate class object*/
-    static Election_head_boy headboy = new  Election_head_boy();/**...............Election_head_boy class object*/
+    static MainVote vote = new MainVote();/**...........................MainVote class object*/
+    VoteRetrieval ret = new VoteRetrieval();
+    HouseStore house = new HouseStore();
+    Password pass = null;
     int counter;
     String nextvoter;
+    String presenthouse = null;
     public Election_Main()
     {
         String template =  "/u003500"; /**........................................Template for the voter ID*/
@@ -32,42 +36,65 @@ import java.util.concurrent.TimeUnit;
      * @param hexa takes the unicode and converts into integer
      * @returns  the classno in integer format
      */
-    public void dispHex(String hexa) 
+    public boolean dispHex(String hexa) 
     {
         String hex = hexa;
         int intValue = Integer.parseInt(hex, 16);
-        System.out.println((char)intValue);      
+        char charval = (char)intValue;
+        if(Character.getNumericValue(charval) == classno){
+            return true;
+        } 
+        else{
+          return false;
+        }
     }
     /**
      * Method voterId()
      * Used to authenticate the voter ID entered 
      *
      */
-    public void voterId()throws IOException , InterruptedException {
-        boolean check = checkId(presentid);
-       String code = presentid.substring(2,6);
-        if(check == true ){  
-           dispHex(code);
+    public void voterId()throws Exception , InterruptedException {
+        boolean checkid = checkId(presentid);
+        boolean checkno = false;
+       
+       if(checkid == true ){  
+           String code = presentid.substring(2,6);
+           checkno = dispHex(code);
         }
-        else if(check == false){
-        System.err.println("improper ID .Please repeat the process again");
-        ob.credential();
-      }
-      else{
+       if(checkno == false){
+          System.out.println("Improper class number.Please try again with the correct number");
+       }
+       if(checkid == false){
+          System.err.println("improper ID .Please repeat the process again");
+          ob.credential();
+        }
+        else{
           //Do nothing
         }
+    }
+    public void Entrance(){
+       System.out.println("\u263A\u263A\u263A\u263A\u263A");
+       System.out.println("*******Welcome to the elections of Cauvery Primary and High School*******");
+       System.out.println("$$$$$$$$$$$$Welcome To The Election Process$$$$$$$$$$$$");
     }
     /**
      * Method credential()
      * Used to input voter data;
      */
     public void credential()throws IOException , InterruptedException {
-        System.out.println("$$$$$$$$$$$$Welcome To The Election Process$$$$$$$$$$$$");
         System.out.println("Enter your voter ID");
         presentid = buf.readLine();
-        System.out.println("Enter class number");    
-        classno = Integer.parseInt(buf.readLine());
-        
+        try{
+          System.out.println("Enter your class number.Do not enter the section");    
+          classno = Integer.parseInt(buf.readLine());
+        }catch(Exception e){
+          System.out.println("Invalid class number");
+          credential();
+        }
+        System.out.println("Enter your house name");
+        System.out.println("Enter \n A for Agni House \n P for Prithvi House \n V for Vayu House \n J for Jala House");
+        presenthouse = buf.readLine();
+        Thread.sleep(1);
       }
      /**
       * Method checkId()
@@ -76,7 +103,7 @@ import java.util.concurrent.TimeUnit;
       * @return true:if voter ID is correct.
       *        false:if wrong.
       */              
-     public static boolean checkId(String votid){
+     public static boolean checkId(String votid) throws Exception {
          if(votid.length() == 8){
              return true;
         }
@@ -89,34 +116,42 @@ import java.util.concurrent.TimeUnit;
      * Method repeat()
      * 
      */
-    void repeat()throws IOException , InterruptedException{
+    void repeat()throws IOException ,Exception{
         System.out.print("\u000C");
         System.out.println("OK");
         ob.select();
     }
-    void select()throws IOException , InterruptedException{
-        
+    void select()throws IOException , InterruptedException,Exception{
+        ob.Entrance();
         ob.credential();
         counter += 1;
         ob.voterId();
          vote.headboy(); 
-        System.out.println("For the next voter,Press y.To proceed with the next class enter the code");
-        nextvoter = buf.readLine();
-        System.out.println(nextvoter);
-        if(nextvoter.equals("y") == true||nextvoter.equals("Y") == true)
-        {
-          ob.repeat();
-        }
-        else if(nextvoter.equals("passwordenter") == true){
+         vote.headGirl();
+         vote.sportsCap();
+         house.select(presenthouse);
+        System.out.println("For the next voter,Press any key.To proceed with the next class enter the code");
+        String next = buf.readLine();
+        if(next.equals("\u0070\u0061\u0073\u0073\u0077\u006f\u0072\u0064\u0065\u006e\u0074\u0065\u0072") == true){
+        pass = new Password();
+        nextvoter =pass.getPassword("Enter the confidential password");
+        
+        if(nextvoter.equals("\u0070\u0061\u0073\u0073\u0077\u006f\u0072\u0064\u0065\u006e\u0074\u0065\u0072") == true){
             System.out.println("The voting process will be stopped");
+            ret.ask();
         }
         else{
-            System.out.println("enter");
+            //Do nothing
         }
-     }
-    public void voteCand(){
+     }else {
+         ob.repeat();
+        }
     }
-    public static void main(String args[])throws IOException , InterruptedException  {
+    public String getHouse(){
+        return presenthouse;
+    }
+    public static void main(String args[])throws Exception , InterruptedException  {
        ob.select();       
     }
 }         
+
