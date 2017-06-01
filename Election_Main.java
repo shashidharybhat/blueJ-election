@@ -52,9 +52,9 @@ import java.util.*;
     /**
      * Method voterId()
      * Used to authenticate the voter ID entered 
-     *
+     *@throws Exception
      */
-    public void voterId()throws Exception , InterruptedException {
+    public void voterId()throws Exception  {
         boolean checkid = checkId(presentid);
         boolean checkno = false;
        
@@ -66,12 +66,12 @@ import java.util.*;
        if(checkno == false){
           System.out.println("Improper class number.Please try again with the correct number");
           ob.credential();
-          System.out.print("\u000C");
+          
        }
        if(checkid == false){
           System.out.println("Improper ID .Please repeat the process again");
           ob.credential();
-          System.out.print("\u000C");
+          
         }
         else{
           //Do nothing
@@ -83,10 +83,11 @@ import java.util.*;
        System.out.println("$$$$$$$$$$$$Welcome To The Election Process$$$$$$$$$$$$");
     }
     /**
-     * Method credential()
-     * Used to input voter data;
+     * Method credential
+     *@throws Exception
      */
     public void credential()throws Exception {
+        System.out.println();
         System.out.println("Enter your voter ID");
         presentid = buf.readLine();
         try{
@@ -94,15 +95,18 @@ import java.util.*;
           classno = Integer.parseInt(buf.readLine());
         }catch(Exception e){
           System.out.println("Invalid class number");
-          credential();
           System.out.print("\u000C");
+           credential();
+          
         }
         System.out.println("Enter your house name");
         System.out.println("Enter \n A for Agni House \n P for Prithvi House \n V for Vayu House \n J for Jala House");
         presenthouse = buf.readLine();
         ob.voterId();
         Thread.sleep(1);
-      }
+      
+    }
+    
      /**
       * Method checkId()
       *
@@ -118,6 +122,10 @@ import java.util.*;
             return false;
         }
     }
+    /**
+     * Method trueVoteid
+     *@throws Exception
+     */
     public void trueVoteid()throws Exception{
         counter++;
         boolean truevote = true;
@@ -135,7 +143,7 @@ import java.util.*;
         }else{
             System.out.println("VoterId Invalid Please enter the details again");
             ob.credential();
-            System.out.print("\u000C");
+            
         }
     }
     /**
