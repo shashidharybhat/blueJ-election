@@ -1,1 +1,1 @@
-A High School Project for the conduction of Elections in a Digital manner
+A Project for conducting the High School elections at my School digitally 
